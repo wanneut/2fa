@@ -1,7 +1,7 @@
 #!/bin/bash
 CONTENT_FILE=/tmp/content
 SECRET=/etc/secret
-ADDRESS='[2001:db8::1]'
+ADDRESSES=( '[2001:db8::1]' '192.0.0.1' )
 export PATH="/usr/local/bin:/bin:/usr/bin"
 
 cp -a $SECRET $CONTENT_FILE
@@ -13,7 +13,9 @@ while true; do
     cat /home/$user/.oath.enc > $CONTENT_FILE
     echo $user >> $CONTENT_FILE
     cat $SECRET $CONTENT_FILE | openssl sha3-256 -binary | base64 >> $CONTENT_FILE
-    socat OPEN:$CONTENT_FILE TCP-CONNECT:$ADDRESS:165
+    for ADDRESS in "${ADDRESSES[@]}"
+      do socat OPEN:$CONTENT_FILE TCP-CONNECT:$ADDRESS:165
+    done
     mv /home/$user/.oath.enc /usr/local/etc/oath/$user
   done
 done
