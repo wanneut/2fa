@@ -2,6 +2,7 @@
 CONTENT_FILE=/tmp/content
 SECRET=/etc/secret
 ADDRESS='[2001:db8::1]'
+export PATH="/usr/local/bin:/bin:/usr/bin"
 
 cp -a $SECRET $CONTENT_FILE
 

@@ -2,6 +2,7 @@
 
 SECRET=/etc/secret
 OATH_FILE=/etc/users.oath
+export PATH="/usr/local/bin:$PATH"
 
 mkdir -m 100 -p /tmp/incomming
 tmpfile=$(mktemp /tmp/incomming/oath-XXXXXXXXXXXX)
