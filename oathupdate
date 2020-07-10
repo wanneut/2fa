@@ -1,6 +1,6 @@
 #!/bin/bash
 CONTENT_FILE=/tmp/content
-SECRET=/etc/secret
+SECRET=/etc/2fa/secret
 ADDRESSES=( '[2001:db8::1]' '192.0.0.1' )
 export PATH="/usr/local/bin:/bin:/usr/bin"
 
