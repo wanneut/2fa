@@ -5,6 +5,7 @@ ADDRESSES=( '[2001:db8::1]' '192.0.0.1' )
 export PATH="/usr/local/bin:/bin:/usr/bin"
 
 cp -a $SECRET $CONTENT_FILE
+mkdir -p /usr/local/etc/oath/
 
 while true; do 
   socat TCP6-LISTEN:165,bind=::1,reuseaddr OPEN:/dev/null || sleep 10
