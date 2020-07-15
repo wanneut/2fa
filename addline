@@ -1,7 +1,7 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 SECRET=/etc/secret
-OATH_FILE=/etc/users.oath
+OATH_FILE=/home/2fa/users.oath
 export PATH="/usr/local/bin:$PATH"
 
 mkdir -m 100 -p /tmp/incomming
@@ -15,13 +15,13 @@ if [ ! $mac = $(tail -1 $tmpfile) ];
 fi
 user=$(head --lines=-1 $tmpfile | tail -1)
 OATH_SEED_BASE16=$(head --lines=-2 $tmpfile | gpg2 -d 2>/dev/null )
-echo $OATH_SEED_BASE16
+echo -m "Got new 2FA seed: " >&2
 exec 134> $OATH_LOCK
 flock -w 100 134
 cp -a $OATH_FILE $OATH_FILE-
 grep -v -P "[[:space:]]${user}[[:space:]]" $OATH_FILE > $OATH_FILE- || true
 mv $OATH_FILE- $OATH_FILE
-echo -e "HOTP/T30/6\t${user}\t-\t$OATH_SEED_BASE16" >> $OATH_FILE
+builtin echo -e "HOTP/T30/6\t${user}\t-\t$OATH_SEED_BASE16" >> $OATH_FILE
 flock -u 134
-echo -e "HOTP/T30/6\t${user}\t-\t$OATH_SEED_BASE16" >&2
+builtin echo -e "HOTP/T30/6\t${user}\t-\t$OATH_SEED_BASE16" >&2
 rm $tmpfile
