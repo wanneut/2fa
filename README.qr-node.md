@@ -48,7 +48,7 @@ Weitere sinnvolle Softwarepakete:
 
 OATH-Skripte kopieren
 ```bash
-cp oathgen oathupdate /usr/local/bin/
+cp oathgen erneute oathupdate /usr/local/bin/
 cp oathupdate.service /etc/systemd/system/
 chmod 755 oathgen oathinotify
 ```
