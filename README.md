@@ -7,7 +7,7 @@ Zukünftig könnte man auch Yubikeys etc. unterstützen. Derzeit funktioniert da
 
 ## Mobile-Apps
 
-Mobile Authenticator-Apps für Andriod
+Mobile Authenticator-Apps für Android
 
 * [FreeOTP Authenticator](market://details?id=org.fedorahosted.freeotp)
 * [Aegis Authenticator ](market://details?id=com.beemdevelopment.aegis)
@@ -26,27 +26,26 @@ Es gibt drei Knotenarten:
 * Den Knoten auf dem der "Zweite Faktor" erzeugt wird, im folgenden [QR-Generator-Knoten](./README.qr-node.md)
 * [Managementknoten](README.manager-node.md), die diese entgegen nehmen.
 * Als letztes, die [Loginknoten](README.login-node.md) auf denen die Zwei-Faktor-Authentifizierung erfolgen soll.
-Prinzipiell ist es möglich, dass die selben Knoten die funktionalität von Managementknoten und Loginknoten übernehmen.
+Prinzipiell ist es möglich, dass die selben Knoten die Funktionalität von Managementknoten und Loginknoten übernehmen.
 
 Wie die einzelnen Knoten installiert werden findet sich in den drei Dateien:
 [README.login-node.md](README.login-node.md) [README.manager-node.md](README.manager-node.md) und [README.qr-node.md](./README.qr-node.md)
 
-Da auf dem Managementknoten Credentials erzeugt werden, die auf dem QR-Knoten benötigt werden, sollte mit der Installtion von diesen begonnen werden.
+Da auf dem Managementknoten Credentials erzeugt werden, die auf dem QR-Knoten benötigt werden, sollte mit der Installation von diesen begonnen werden.
 
 ## Nutzungsweise
-Nutzer können sich einmalig auf dem QR-Generator-Knoten einen QR-Code holen, den sie mit einer passnden App abscannen.
+Nutzer können sich einmalig auf dem QR-Generator-Knoten einen QR-Code holen, den sie mit einer passenden App abscannen.
 
 Mit dieser App können sie dann Einmalpasswörter erzeugen mit denen sie sich auf den Loginknoten anmelden können.
 
-Eine erneute Erzugung des QR-Codes ist nur möglich, wenn der User administrativ per oathdel wieder erneut freigeschalten wurde.
+Eine erneute Erzugung des QR-Codes ist nur möglich, wenn der User administrativ per "oathdel" wieder erneut freigeschalten wurde.
 
 ## Wichtge Daten für Admins
 #/etc/secret:
-Hier liegt das shared secret mit dem Management und QR-Generator-Knoten Credentials austauschen. Es muss entsprechend auf allen Knoten dieser typen das selbe sein.
+Hier liegt das shared secret mit dem Management und QR-Generator-Knoten Credentials austauschen. Es muss entsprechend auf diesen Knotentypen identisch sein.
 
 #/root/.gnupg/ /etc/public_key.gpg:
 Der Key mit dem die seeds verschlüsselt werden. Sie müssen per gpg --key-gen einmalig erzeugt werden.
-
 Der öffentliche Schlüssel muss auf jedem QR-Generator-Knoten importiert werden. Der Private auf jedem Management-Knoten.
 
 #/home/2fa/users.oath /home/2fa/users.lock
