@@ -24,19 +24,19 @@ und IOS
 
 Es gibt drei Knotenarten:
 * Den Knoten auf dem der "Zweite Faktor" erzeugt wird, im folgenden [QR-Generator-Knoten](./README.qr-node.md)
-* [Managementknoten](README.manager-node.md), die diese Entgegen nehmen.
+* [Managementknoten](README.manager-node.md), die diese entgegen nehmen.
 * Als letztes, die [Loginknoten](README.login-node.md) auf denen die Zwei-Faktor-Authentifizierung erfolgen soll.
 Prinzipiell ist es möglich, dass die selben Knoten die funktionalität von Managementknoten und Loginknoten übernehmen.
 
 Wie die einzelnen Knoten installiert werden findet sich in den drei Dateien:
-README.login-node.md README.manager-node.md und README.qr-node.md
+[README.login-node.md](README.login-node.md) [README.manager-node.md](README.manager-node.md) und [README.qr-node.md](./README.qr-node.md)
 
-Da auf dem Management Credentials erzeugt werden, die auf dem QR-Knoten benötigt werden, sollte mit der installtion von diesen angefangen werden.
+Da auf dem Managementknoten Credentials erzeugt werden, die auf dem QR-Knoten benötigt werden, sollte mit der Installtion von diesen begonnen werden.
 
 ## Nutzungsweise
 Nutzer können sich einmalig auf dem QR-Generator-Knoten einen QR-Code holen, den sie mit einer passnden App abscannen.
 
-Mit dieser können sie dann einmalpasswörter erzeugen mit denen sie sich auf den Loginknoten anmelden können.
+Mit dieser App können sie dann Einmalpasswörter erzeugen mit denen sie sich auf den Loginknoten anmelden können.
 
 Eine erneute Erzugung des QR-Codes ist nur möglich, wenn der User administrativ per oathdel wieder erneut freigeschalten wurde.
 
@@ -52,5 +52,5 @@ Der öffentliche Schlüssel muss auf jedem QR-Generator-Knoten importiert werden
 #/home/2fa/users.oath /home/2fa/users.lock
 Hier liegt die Liste der User und deren Seeds.
 
-Sie muss zwischen allen QR-Generator-Knoten und Management-Knoten jederzeit synchron gehalten werden. Passiert dies nicht können die gleichen "Einmalpasswörter" mehrfach verwendet werden.
-Es empfiehlt sich stark ein verteiles Dateisystem. Prinzipiell ist aber auch jeder andere Synchronisierungsmechanismus möglich.
+Sie muss zwischen allen QR-Generator-Knoten und Management-Knoten jederzeit synchron gehalten werden. Passiert dies nicht, können die gleichen "Einmalpasswörter" mehrfach verwendet werden.
+Es empfiehlt sich stark ein geshartes Dateisystem. Prinzipiell ist aber auch jeder andere Synchronisierungsmechanismus möglich.

@@ -1,8 +1,8 @@
 # Zwei-Faktor-Knoten
 
-### Voraussetzungen
+## Voraussetzungen
 
-Damit der "Zweite Faktor" geprüfte werden kann werden nur folgendes Paket benötigt.
+Damit der "Zweite Faktor" geprüfte werden kann werden folgendes Paket benötigt.
 ```bash
 # EPEL Repo
 yum install -y epel-release
@@ -10,16 +10,15 @@ yum install -y epel-release
 yum install -y pam_oath pam_ssh_user_auth
 ```
 
-### PAM konfigurieren
+## PAM konfigurieren
 
-
-PAM konfigurieren für SSH `/etc/pam.d/sshd`. Je nachdem ob diese Zeile am Anfang oder Ende steht wird das TOTP-Token vor oder nach Passworteingabe abgefragt.
+PAM konfigurieren für SSH passiert über die `/etc/pam.d/sshd`. Je nachdem ob die folgende Zeile am Anfang oder Ende steht wird das TOTP-Token vor oder nach der Passworteingabe abgefragt.
 ```bash
 auth	  required pam_oath.so usersfile=/home/2fa/users.oath window=30 digits=6
 ```
 
 
-Soll im fall, dass zuvor schon eine Public-Key-Authentification erfolgte nicht mehr erneut das passwort abgefragt werden, wird pam_ssh_user_auth.so benötigt.
+Soll in dem  Fall, dass zuvor schon eine Public-Key-Authentification erfolgte nicht mehr erneut das passwort abgefragt werden, wird pam_ssh_user_auth.so benötigt.
 
 
 Eine passende: /etc/pam.d/sshd
@@ -31,8 +30,8 @@ auth       include      postlogin
 ```
 ### OpenSSH Konfigurieren
 
-PasswordAuthentication funktioniert nicht zusammen mit TOTP deswegen sollte diese aus und ChallengeResponseAuthentication (die ebenfalls das Passwort abfragen kann) eingeschaltet werden.
-Sollen Zusätzlich SSH-Schlüssel mit TOTP abgesichert werden, müssen die nacheinander abgefragt werden.
+PasswordAuthentication funktioniert nicht zusammen mit TOTP deswegen sollte diese aus, und ChallengeResponseAuthentication (die ebenfalls das Passwort abfragen kann) eingeschaltet werden.
+Sollen Zusätzlich SSH-Schlüssel mit TOTP abgesichert werden, müssen diese nacheinander abgefragt werden.
 
 Soll beides möglich sein (nur CentOS 8)
 ```bash
@@ -58,7 +57,7 @@ AuthenticationMethods publickey,keyboard-interactive:pam keyboard-interactive:pa
 ```
 
 Optional:
-Soll für gewisse gruppen kein TOTP verlagnt werden, weil sie Keys mit passwörtern nutzen:
+Soll für gewisse Gruppen kein TOTP verlangt werden, weil sie Keys mit Passwörtern nutzen:
 ```bash
 Match Group nootp
   AuthenticationMethods publickey

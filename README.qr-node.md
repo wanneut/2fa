@@ -1,4 +1,4 @@
-### QR-Code-Generator-Knoten
+# QR-Code-Generator-Knoten
 
 ## Vorraussetzungen
 
@@ -9,7 +9,7 @@ Installation von Paketabhängigkeiten bei CentOS7
 # EPEL Repo
 yum install -y epel-release
 # oathtool, QR-Code-Generator und inotify-tools
-yum install -y oathtool qrencode pinentry socat nmap-ncat
+yum install -y oathtool qrencode pinentry socat nmap-ncat vim
 ```
 
 In CentOS 7 liegt noch kein base32 bei.
@@ -17,6 +17,7 @@ Der passende Pyhton-Einzeile liegt im repo bei und muss eventuell in den $PATH k
 ```bash
 cp base32 /usr/bin/
 ```
+
 Daneben ist das OpenSSL zu alt. Ein OpenSSL, dass mindestens die Version 1.1.1 hat muss ebenfalls installiert werden.
 Es kann einfach mit ./config && make unter CentOS 7 gebaut werden.
 Eventuell müssen PATH und LD_LIBRARY_PATH in oathupdate entsprechend angepasst werden.
@@ -25,7 +26,7 @@ Prinzipiell liegen auch auf MD5 basierende oathupdate und addline-Scripte bei.
 Diese kommen auch mit dem auf CentOS 7 verfügbaren OpenSSL aus.
 Es wird nicht empfohlen diese Varianten zu nutzen.
 
-Wenn Nutzer-Homes automatisch angelegt werden sollen, Oddjob installieren
+Wenn Nutzer-Homes automatisch angelegt werden sollen, muss Oddjob installieren
 ```bash
 yum install -y oddjob-mkhomedir
 authconfig --enablemkhomedir --update
@@ -53,12 +54,14 @@ cp oathupdate.service /etc/systemd/system/
 chmod 755 oathgen oathinotify
 ```
 
-copy credentials
+Es müssen die passenden Credentials vom Management Knoten geholt werden.
 ```bash
 scp management:/etc/public_key.gpg /etc/public_key.gpg
 install -m 600 /dev/null /etc/secret
 ssh management cat /etc/secret > /etc/secret
 ```
+
+## Konfiguration vornehmen
 
 Systemd-Service aktivieren
 ```bash
@@ -75,6 +78,7 @@ SSHD-Konfiguration `/etc/ssh/sshd_config` anpassen
 Match User *,!root
         ForceCommand /usr/local/bin/oathgen
 ```
+
  SSH-Dienst neu laden
  ```bash
  systemctl reload sshd.service
