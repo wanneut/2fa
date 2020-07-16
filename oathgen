@@ -1,24 +1,28 @@
 #!/bin/bash
 
-export OATH_TMP_FILE=${HOME}/.oath.enc
-export LOGINNAME="login.nemo.uni-freiburg.de"
-export PUB_KEY="key@subission.binac"
-export PUB_KEY_FILE=/etc/public_key.gpg
+export LOGINNAME="<login.knoten>"
+OATH_HOTL="<support@examle.com>"
+ISSUER="<issuer>"
+IMG_URL="<favicon.url>"
+
+
 OATH_USER_FILE=/usr/local/etc/oath/$USER
-OATH_HOTL="enm-support@hpc.uni-freiburg.de"
+export PUB_KEY_FILE=/etc/public_key.gpg
+export OATH_TMP_FILE=${HOME}/.oath.enc
+export PUB_KEY="key@subission"
 
 add_user () {
     OATH_SEED_BASE16=$( head -c 15 /dev/urandom | xxd -p )
     OATH_SEED_BASE32=$( echo $OATH_SEED_BASE16 | xxd -p -r | base32)
     gpg --import $PUB_KEY_FILE 2> /dev/null
-    echo -e "$OATH_SEED_BASE16" | gpg2 -a -e -r key@subission.binac --trust-model always > $OATH_TMP_FILE
+    echo -e "$OATH_SEED_BASE16" | gpg2 -a -e -r "$PUB_KEY" --trust-model always > $OATH_TMP_FILE
     echo "Only if you cannot scan the QR Code with your Authenticator APP:"
     echo "Base32: $OATH_SEED_BASE32"
     echo "Type: TOTP"
     echo "Digits: 6"
     echo "Iterations: 30"
     echo "Algorithm: SHA-1"
-    qrencode -t UTF8 "otpauth://totp/${1}@${LOGINNAME}?secret=${OATH_SEED_BASE32}"
+    qrencode -t UTF8 "otpauth://totp/${1}@${LOGINNAME}?secret=${OATH_SEED_BASE32}&issuer=$ISSUER&image="
     echo "RUN" | nc ::1 165
 }
 

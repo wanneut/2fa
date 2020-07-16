@@ -20,11 +20,11 @@ make install
 
 Hinweis: "make test" ist fehlerhaft. Prinzipiell liegen auch auf MD5 basierende oathupdate und addline-Scripte bei, die mit dem auf CentOS 7 verfügbaren OpenSSL auskommen. Es wird nicht empfohlen diese Varianten zu nutzen.
 
-### EPEL Repo: oathtool
+### EPEL Repo:
 
 ```bash
 yum install -y epel-release
-yum install -y oathtool qrencode pinentry socat nmap-ncat vim gpgme
+yum install -y oathtool qrencode pinentry socat nmap-ncat vim
 ```
 
 ### Optional: Automatisches Erstellen der home-Verzeichnisse
@@ -35,14 +35,6 @@ authconfig --enablemkhomedir --update
 ```
 
 ## Installation
-
-### CentOS 7 
-
-Hier liegt noch kein base32 bei. Den passenden Pyhton-Einzeiler in den $PATH kopieren:
-
-```bash
-cp base32 /usr/bin/
-```
 
 ### OATH-Skripte kopieren
 
@@ -60,8 +52,17 @@ scp <management-node>:/etc/2fa/public_key.gpg /etc/2fa/public_key.gpg
 install -m 600 /dev/null /etc/2fa/secret
 ssh <management-node> cat /etc/2fa/secret > /etc/2fa/secret
 ```
+### CentOS 7 
+
+Hier liegt noch kein base32 bei. Den passenden Pyhton-Einzeiler in den $PATH kopieren:
+
+```bash
+cp base32 /usr/bin/
+```
 
 ## Konfiguration
+
+LOGINNAME, OATH_HOTL, ISSUER und IMG_URL in oathgen anpassen.
 
 ### Systemdienst aktivieren
 
@@ -83,10 +84,7 @@ Match User *,!root
 
 ### SSH-Server neu laden
 
- ```bash
+```bash
  systemctl reload sshd.service
 ```
-
-
-
 
