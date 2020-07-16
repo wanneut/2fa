@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+OATH_FILE=/home/2fa/users.oath
+OATH_LOCK=/home/2fa/users.lock
+OATH_USER="$1"
+
+if ! echo "x${OATH_USER}" | grep -qE "^x.._"; then
+    echo "Not a valid Username"
+    exit 1
+    else echo Removing user ${OATH_USER}
+fi
+
+
+exec 134> $OATH_LOCK
+flock -w 100 134
+cp -a $OATH_FILE $OATH_FILE-
+if ! grep -q -P "[[:space:]]${OATH_USER}[[:space:]]" $OATH_FILE
+  then echo User does not exist.
+fi
+grep -v -P "[[:space:]]${OATH_USER}[[:space:]]" $OATH_FILE > $OATH_FILE-
+mv $OATH_FILE-  $OATH_FILE
+flock -u 134
