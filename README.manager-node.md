@@ -2,9 +2,13 @@
 
 Knoten, der die Credentials entgegen nimmt.
 
+## Voraussetzungen
+
+Es wird vorausgesetzt, daß alle Knotentypen die selbe Nutzerauthentifizierung nutzen (z.B. LDAP).
+
 ## Abhängigkeiten
 
-* OpenSSL >=1.1.1 
+### OpenSSL >=1.1.1 
 
 Installation unter RHEL/CentOS 7 (ab Version 8 enthalten):
 
@@ -15,20 +19,23 @@ tar xvfz openssl-1.1.1g.tar.gz && cd openssl-1.1.1g
 make
 make install
 ```
-Hinweis: "make test" ist fehlerhaft.
 
-* "socat" (EPEL Repo):
+Hinweis: "make test" ist fehlerhaft. Prinzipiell liegen auch auf MD5 basierende oathupdate und addline-Scripte bei, die mit dem auf CentOS 7 verfügbaren OpenSSL auskommen. Es wird nicht empfohlen diese Varianten zu nutzen.
+
+### EPEL Repo: `socat`
 
 ```bash
 yum install -y epel-release
 yum install -y socat
 ```
 
-* Port 165/tcp in der Firewall freigeben
+### Firewall
+
+ Port 165/tcp in der Firewall freigeben.
 
 ## Installation
 
-* OATH-Skripte
+### OATH-Skripte
 
 Eventuell müssen PATH und LD_LIBRARY_PATH für OpenSSL in addline angepasst werden (siehe oben).
 
@@ -42,7 +49,7 @@ systemctl enable addline
 systemctl start addline
 ```
 
-* Erstellen der Schlüssel zum Verschlüsseln der "Zweiten Faktoren"
+### Erstellen der Schlüssel zum Verschlüsseln der "Zweiten Faktoren"
 
 "Pfad" sollte im einfachsten Fall einem verteilten Dateisystem (NFS, Lustre, etc.) entsprechen.
 

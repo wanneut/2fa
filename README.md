@@ -1,4 +1,5 @@
 # 2FA
+
 2FA zum Testen für bwHPC
 
 Nutzer können sich einmalig auf dem QR-Generator-Knoten einen QR-Code erzeugen lassen, den sie mit einer geeigneten App abscannen. Diese erzeugt nun Einmalpasswörter, die als zweiter Faktor beim Login auf dem eigentlichen System abgefragt werden. Zukünftig könnte man auch Yubikeys etc. unterstützen, doch funktioniert derzeit lediglich die Yubikey-Mobil-App.
@@ -7,7 +8,7 @@ Eine erneute Erzeugung des QR-Codes ist nur möglich, wenn der Nutzer administra
 
 ## Installation
 
-Es gibt drei Knotentypen, wobei Management- und Loginknoten identisch sein können. Da auf dem Managementknoten Credentials erzeugt werden, die der QR-Generator-Knoten ebenfalls benötigt, sollte mit dessen Installation begonnen werden:
+Es gibt drei Knotentypen, wobei Management- und Loginknoten identisch sein können. Im einfachsten Fall nutzen alle drei Knotentypen die selbe Nutzerauthentifizierung (z.B. LDAP). Da auf dem Managementknoten Credentials erzeugt werden, die der QR-Generator-Knoten ebenfalls benötigt, sollte mit dessen Installation begonnen werden:
 
 * [QR-Generator-Knoten](./README.qr-node.md), dient ausschliesslich zum Erzeugen des zweiten Faktors, dem QR-Code. 
 * [Managementknoten](README.manager-node.md) nehmen diesen QR-Code entgegen.
