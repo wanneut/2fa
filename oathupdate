@@ -1,7 +1,9 @@
 #!/bin/bash
+
+ADDRESSES=( '[2001:db8::1]' '192.0.0.1' )
+
 CONTENT_FILE=/tmp/content
 SECRET=/etc/2fa/secret
-ADDRESSES=( '[2001:db8::1]' '192.0.0.1' )
 export PATH="/usr/local/bin:/opt/openssl/bin:/bin:/usr/bin"
 export LD_LIBRARY_PATH="/opt/openssl/lib"
 

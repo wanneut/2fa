@@ -20,11 +20,10 @@ make install
 
 Hinweis: "make test" ist fehlerhaft. Prinzipiell liegen auch auf MD5 basierende oathupdate und addline-Scripte bei, die mit dem auf CentOS 7 verfügbaren OpenSSL auskommen. Es wird nicht empfohlen diese Varianten zu nutzen.
 
-### EPEL Repo:
+### Repo: qrencode pinentry socat nc
 
 ```bash
-yum install -y epel-release
-yum install -y oathtool qrencode pinentry socat nmap-ncat vim
+yum install -y qrencode pinentry socat nmap-ncat vim
 ```
 
 ### Optional: Automatisches Erstellen der home-Verzeichnisse
@@ -62,7 +61,8 @@ cp base32 /usr/bin/
 
 ## Konfiguration
 
-LOGINNAME, OATH_HOTL, ISSUER und IMG_URL in oathgen anpassen.
+* LOGINNAME, OATH_HOTL, ISSUER und IMG_URL in oathgen anpassen.
+* ADDRESSES in oathupdate auf die Adressen der QR-Knoten anpassen
 
 ### Systemdienst aktivieren
 

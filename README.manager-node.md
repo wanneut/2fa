@@ -22,10 +22,9 @@ make install
 
 Hinweis: "make test" ist fehlerhaft. Prinzipiell liegen auch auf MD5 basierende oathupdate und addline-Scripte bei, die mit dem auf CentOS 7 verfügbaren OpenSSL auskommen. Es wird nicht empfohlen diese Varianten zu nutzen.
 
-### EPEL Repo: `socat`
+### Repo: `socat`
 
 ```bash
-yum install -y epel-release
 yum install -y socat
 ```
 
