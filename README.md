@@ -6,8 +6,7 @@ Nutzer können sich einmalig auf dem QR-Generator-Knoten einen QR-Code erzeugen 
 
 Eine erneute Erzeugung des QR-Codes ist nur möglich, wenn der Nutzer administrativ auf dem QR-Generator-Knoten wieder freigeschalten wurde.
 
-Dies ist ein Fork der von [nemo-cluster/2fa](https://github.com/nemo-cluster/
-2fa) die wesentlichen Änderungen sind:
+Dies ist ein Fork der von [nemo-cluster/2fa](https://github.com/nemo-cluster/2fa) die wesentlichen Änderungen sind:
 * Es wird sichere auf RSA basierende Verschlüsslung aus gpg statt des textbook 
 RSA aus openssl verwendet.
 * Es wird sichergestellt, dass die Einmalpasswörter wirklich nur einmalig 
