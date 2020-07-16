@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-SECRET=/etc/secret
+SECRET=/etc/2fa/secret
 OATH_FILE=/home/2fa/users.oath
 export PATH="/usr/local/bin:$PATH"
 
