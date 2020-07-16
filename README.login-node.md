@@ -6,7 +6,7 @@ Es wird vorausgesetzt, daß alle Knotentypen die selbe Nutzerauthentifizierung n
 
 ## Abhängigkeiten
 
-* EPEL Repo:
+### EPEL Repo
 
 ```bash
 yum install -y epel-release
@@ -17,7 +17,7 @@ yum install -y pam_oath pam_ssh_user_auth
 
 ### PAM
 
-Die Konfiguration erfolgt in  `/etc/pam.d/sshd`. Je nachdem, ob die folgende Zeile am Anfang oder Ende steht wird das TOTP-Token vor oder nach der Passworteingabe abgefragt.
+Die Konfiguration erfolgt in `/etc/pam.d/sshd`. Je nachdem, ob die folgende Zeile am Anfang oder Ende steht wird das TOTP-Token vor oder nach der Passworteingabe abgefragt.
 
 ```bash
 auth	  required pam_oath.so usersfile=/<Pfad>/2fa/users.oath window=30 digits=6

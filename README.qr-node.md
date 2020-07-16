@@ -52,18 +52,18 @@ cp oathupdate.service /etc/systemd/system/
 chmod 755 oathgen
 ```
 
-* Kopieren der Credentials vom Management Knoten
+Kopieren der Credentials vom Management Knoten
 
 ```bash
 mkdir /etc/2fa
 scp <management-node>:/etc/2fa/public_key.gpg /etc/2fa/public_key.gpg
 install -m 600 /dev/null /etc/2fa/secret
-ssh <management-node> cat /etc/secret > /etc/2fa/secret
+ssh <management-node> cat /etc/2fa/secret > /etc/2fa/secret
 ```
 
 ## Konfiguration
 
-* Systemdienst aktivieren
+### Systemdienst aktivieren
 
 ```bash
 systemctl daemon-reload
@@ -73,7 +73,7 @@ systemctl start oathupdate.service
                
 Damit die Nutzer*innen nur ein Skript ausführen können, wird nur das in der SSHD-Konfiguration gestattet.
 
-* SSHD-Konfiguration `/etc/ssh/sshd_config` anpassen
+### SSHD-Konfiguration `/etc/ssh/sshd_config` anpassen
 
 ```bash
 # alle außer root führen automatisch Kommando aus
@@ -81,7 +81,7 @@ Match User *,!root
         ForceCommand /usr/local/bin/oathgen
 ```
 
-*  SSH-Dienst neu laden
+### SSH-Server neu laden
 
  ```bash
  systemctl reload sshd.service

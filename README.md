@@ -31,12 +31,9 @@ und IOS
 
 ## Wichtige Dateien und Verzeichnisse
 
-#/etc/2fa/secret:
-Hier liegt das shared secret, mit dem Management und QR-Generator-Knoten Credentials austauschen. Es muss entsprechend auf diesen Knotentypen identisch sein.
+* `/etc/2fa/secret`: Hier liegt das shared secret, mit dem Management und QR-Generator-Knoten Credentials austauschen. Es muss entsprechend auf diesen Knotentypen identisch sein.
 
-#/home/2fa/users.oath /home/2fa/users.lock
-Hier liegt die Liste der User und deren Seeds, welche zwischen QR-Generator- und Management-Knoten synchron sein muss. Es empfiehlt sich daher ein geshartes Dateisystem (NFS, Lustre, etc.), prinzipiell sind aber auch andere Synchronisierungsmechanismus möglich.
+* `/<Pfad>/2fa/users.oath /<Pfad>/2fa/users.lock`: Hier liegt die Liste der User und deren Seeds, welche zwischen QR-Generator- und Management-Knoten synchron sein muss. Es empfiehlt sich daher ein geshartes Dateisystem (NFS, Lustre, etc.), prinzipiell sind aber auch andere Synchronisierungsmechanismus möglich.
 
-#/root/.gnupg/ /etc/public_key.gpg:
-Der Key mit dem die Seeds verschlüsselt werden. Der öffentliche Schlüssel muss auf jedem QR-Generator-Knoten, der private Schlüssel auf jedem Management-Knoten importiert werden.
+* `/root/.gnupg/ /etc/public_key.gpg`: Der Key mit dem die Seeds verschlüsselt werden. Der öffentliche Schlüssel muss auf jedem QR-Generator-Knoten, der private Schlüssel auf jedem Management-Knoten importiert werden.
 
