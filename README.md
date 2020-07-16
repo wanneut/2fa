@@ -1,11 +1,18 @@
 # 2FA
 2FA zum Testen für bwHPC
 
-Bei diesem Ansatz wird nur ein SSH-Zugang des Nutzers benötigt und der QR-Code für Auth-Apps wird angezeigt. Dieser wird nur beim ersten Login angezeigt.
+Nutzer können sich einmalig auf dem QR-Generator-Knoten einen QR-Code erzeugen lassen, den sie mit einer geeigneten App abscannen. Diese erzeugt nun Einmalpasswörter, die als zweiter Faktor beim Login auf dem eigentlichen System abgefragt werden. Zukünftig könnte man auch Yubikeys etc. unterstützen, doch funktioniert derzeit lediglich die Yubikey-Mobil-App.
 
-Zukünftig könnte man auch Yubikeys etc. unterstützen. Derzeit funktioniert das nur nur über die Yubikey-Mobil-App, die vergleichbar mit den Auth-Apps ist.
+Eine erneute Erzeugung des QR-Codes ist nur möglich, wenn der Nutzer administrativ auf dem QR-Generator-Knoten wieder freigeschalten wurde.
 
-## Mobile-Apps
+## Installation
+
+Es gibt drei Knotentypen, wobei Management- und Loginknoten identisch sein können. Da auf dem Managementknoten Credentials erzeugt werden, die der QR-Generator-Knoten ebenfalls benötigt, sollte mit dessen Installation begonnen werden:
+* [QR-Generator-Knoten](./README.qr-node.md), dient ausschliesslich zum Erzeugen des zweiten Faktors, dem QR-Code. 
+* [Managementknoten](README.manager-node.md) nehmen diesen QR-Code entgegen.
+* [Loginknoten](README.login-node.md), auf denen die Zwei-Faktor-Authentifizierung erfolgen soll.
+
+## Geeignete Mobile-Apps
 
 Mobile Authenticator-Apps für Android
 
@@ -20,36 +27,14 @@ und IOS
 * [Google Authenticator](https://apps.apple.com/us/app/google-authenticator/id388497605)
 * [Yubico Authenticator](https://apps.apple.com/us/app/yubico-authenticator/id1476679808)
 
-## Grundkonzept
+## Wichtige Dateien und Verzeichnisse
 
-Es gibt drei Knotenarten:
-* Den Knoten auf dem der "Zweite Faktor" erzeugt wird, im folgenden [QR-Generator-Knoten](./README.qr-node.md)
-* [Managementknoten](README.manager-node.md), die diese entgegen nehmen.
-* Als letztes, die [Loginknoten](README.login-node.md) auf denen die Zwei-Faktor-Authentifizierung erfolgen soll.
-Prinzipiell ist es möglich, dass die selben Knoten die Funktionalität von Managementknoten und Loginknoten übernehmen.
-
-Wie die einzelnen Knoten installiert werden findet sich in den drei Dateien:
-[README.login-node.md](README.login-node.md) [README.manager-node.md](README.manager-node.md) und [README.qr-node.md](./README.qr-node.md)
-
-Da auf dem Managementknoten Credentials erzeugt werden, die auf dem QR-Knoten benötigt werden, sollte mit der Installation von diesen begonnen werden.
-
-## Nutzungsweise
-Nutzer können sich einmalig auf dem QR-Generator-Knoten einen QR-Code holen, den sie mit einer passenden App abscannen.
-
-Mit dieser App können sie dann Einmalpasswörter erzeugen mit denen sie sich auf den Loginknoten anmelden können.
-
-Eine erneute Erzugung des QR-Codes ist nur möglich, wenn der User administrativ per "oathdel" wieder erneut freigeschalten wurde.
-
-## Wichtge Daten für Admins
-#/etc/secret:
-Hier liegt das shared secret mit dem Management und QR-Generator-Knoten Credentials austauschen. Es muss entsprechend auf diesen Knotentypen identisch sein.
-
-#/root/.gnupg/ /etc/public_key.gpg:
-Der Key mit dem die seeds verschlüsselt werden. Sie müssen per gpg --key-gen einmalig erzeugt werden.
-Der öffentliche Schlüssel muss auf jedem QR-Generator-Knoten importiert werden. Der Private auf jedem Management-Knoten.
+#/etc/2fa/secret:
+Hier liegt das shared secret, mit dem Management und QR-Generator-Knoten Credentials austauschen. Es muss entsprechend auf diesen Knotentypen identisch sein.
 
 #/home/2fa/users.oath /home/2fa/users.lock
-Hier liegt die Liste der User und deren Seeds.
+Hier liegt die Liste der User und deren Seeds, welche zwischen QR-Generator- und Management-Knoten synchron sein muss. Es empfiehlt sich daher ein geshartes Dateisystem (NFS, Lustre, etc.), prinzipiell sind aber auch andere Synchronisierungsmechanismus möglich.
 
-Sie muss zwischen allen QR-Generator-Knoten und Management-Knoten jederzeit synchron gehalten werden. Passiert dies nicht, können die gleichen "Einmalpasswörter" mehrfach verwendet werden.
-Es empfiehlt sich stark ein geshartes Dateisystem. Prinzipiell ist aber auch jeder andere Synchronisierungsmechanismus möglich.
+#/root/.gnupg/ /etc/public_key.gpg:
+Der Key mit dem die Seeds verschlüsselt werden. Der öffentliche Schlüssel muss auf jedem QR-Generator-Knoten, der private Schlüssel auf jedem Management-Knoten importiert werden.
+
