@@ -54,8 +54,8 @@ systemctl start addline
 
 ```bash
 mkdir /etc/2fa
-gpg2 --gen-key                                              # Schlüssel für die Adresse <name>@<machine> erzeugen
-gpg --export <name>@<machine> > /etc/2fa/public_key.gpg     # Für Management- und QR-Generator-Knoten
+gpg2 --gen-key                                              # Schlüssel für die Mail-Adresse "key@subission" erzeugen
+gpg --export key@subission > /etc/2fa/public_key.gpg     # Für Management- und QR-Generator-Knoten
 gpg -a --export-secret-key    > /etc/2fa/private_key.gpg    # Für Backup etc.
 install -m 600 /dev/null /etc/2fa/secret
 head -c 15 /dev/urandom       > /etc/2fa/secret
