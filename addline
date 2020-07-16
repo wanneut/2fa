@@ -8,14 +8,13 @@ mkdir -m 100 -p /tmp/incomming
 tmpfile=$(mktemp /tmp/incomming/oath-XXXXXXXXXXXX)
 cat > $tmpfile
 mac=$(cat $SECRET $tmpfile | head --lines=-1 | openssl sha3-256 -binary | base64)
-echo $mac
-if [ ! $mac = $(tail -1 $tmpfile) ];
+if [ ! "$mac" = "$(tail -1 $tmpfile)" ];
   then echo Error: MAC not valid >&2
   exit 1
 fi
 user=$(head --lines=-1 $tmpfile | tail -1)
 OATH_SEED_BASE16=$(head --lines=-2 $tmpfile | gpg2 -d 2>/dev/null )
-echo -m "Got new 2FA seed: " >&2
+echo -m "Got new 2FA seed:\nMac: $mac" >&2
 exec 134> $OATH_LOCK
 flock -w 100 134
 cp -a $OATH_FILE $OATH_FILE-

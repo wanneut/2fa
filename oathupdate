@@ -16,7 +16,7 @@ while true; do
     echo $user >> $CONTENT_FILE
     cat $SECRET $CONTENT_FILE | openssl sha3-256 -binary | base64 >> $CONTENT_FILE
     for ADDRESS in "${ADDRESSES[@]}"
-      do if socat OPEN:$CONTENT_FILE TCP-CONNECT:$ADDRESS:165,connect-timeout=100
+      do if socat OPEN:$CONTENT_FILE,rdonly TCP-CONNECT:$ADDRESS:165,connect-timeout=100
         then SEND=OK
         else echo Can not send $user to $ADDRESS >&2
         fi
