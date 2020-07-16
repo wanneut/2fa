@@ -46,8 +46,8 @@ Es gibt drei Knotentypen, wobei Management- und Loginknoten identisch sein könn
 [Microsoft Authentificator](http://apps.samsung.com/appquery/appDetail.as?appId=com.azure.authenticator)
 
 ## Infos für Admins
-* Soll ermöglicht werden, dass ein User sich neue Credentials erstellen kann, muss oathdel auf dem QR-Geneartor-Knoten aufgerufen werden. Diese überschreiben die alten sobald der User dies auch wirklich macht.
-* Soll ein 2nd Faktor deaktiviert werden muss auf dem Management deactivateuser $user aufgerufen werden.
+* Soll ermöglicht werden, dass ein User sich neue Credentials erstellen kann, muss oathdel [USER] auf dem QR-Geneartor-Knoten aufgerufen werden. Diese überschreiben die alten sobald der User dies auch wirklich macht.
+* Soll ein 2nd Faktor deaktiviert werden muss auf dem Management oathdeact [USER] aufgerufen werden.
 Diese funktionen sind also komplementär.
 
 ## Wichtige Dateien und Verzeichnisse

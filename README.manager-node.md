@@ -40,9 +40,8 @@ yum install -y socat
 Eventuell müssen PATH und LD_LIBRARY_PATH für OpenSSL in addline angepasst werden (siehe oben).
 
 ```bash
-cp oathcron addline /usr/local/bin/
-chmod 755 oathcron
-chmod +x /usr/local/bin/addline
+cp addline oathdeact /usr/local/bin/
+chmod +x /usr/local/bin/addline /usr/local/bin/oathdeact
 cp addline.service /etc/systemd/system/addline.service
 systemctl daemon-reload
 systemctl enable addline
