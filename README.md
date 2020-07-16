@@ -8,6 +8,7 @@ Eine erneute Erzeugung des QR-Codes ist nur möglich, wenn der Nutzer administra
 ## Installation
 
 Es gibt drei Knotentypen, wobei Management- und Loginknoten identisch sein können. Da auf dem Managementknoten Credentials erzeugt werden, die der QR-Generator-Knoten ebenfalls benötigt, sollte mit dessen Installation begonnen werden:
+
 * [QR-Generator-Knoten](./README.qr-node.md), dient ausschliesslich zum Erzeugen des zweiten Faktors, dem QR-Code. 
 * [Managementknoten](README.manager-node.md) nehmen diesen QR-Code entgegen.
 * [Loginknoten](README.login-node.md), auf denen die Zwei-Faktor-Authentifizierung erfolgen soll.
