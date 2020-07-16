@@ -2,6 +2,7 @@
 
 SECRET=/etc/2fa/secret
 OATH_FILE=/home/2fa/users.oath
+OATH_LOCK=/home/2fa/users.lock
 export PATH="/usr/local/bin:$PATH"
 
 mkdir -m 100 -p /tmp/incomming
@@ -14,7 +15,7 @@ if [ ! "$mac" = "$(tail -1 $tmpfile)" ];
 fi
 user=$(head --lines=-1 $tmpfile | tail -1)
 OATH_SEED_BASE16=$(head --lines=-2 $tmpfile | gpg2 -d 2>/dev/null )
-echo -m "Got new 2FA seed:\nMac: $mac" >&2
+echo -e "Got new 2FA seed:\nMac: $mac" >&2
 exec 134> $OATH_LOCK
 flock -w 100 134
 cp -a $OATH_FILE $OATH_FILE-

@@ -26,7 +26,7 @@ Es gibt drei Knotentypen, wobei Management- und Loginknoten identisch sein könn
 
 ### Mobile Authenticator-Apps für Android
 
-* [FreeOTP Authenticator](market://details?id=org.fedorahosted.freeotp) ([PlayStore](https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp) [Webseite](https://freeotp.github.io/)
+* [FreeOTP](market://details?id=org.fedorahosted.freeotp) ([PlayStore](https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp) [Webseite](https://freeotp.github.io/))
 * [Aegis Authenticator ](market://details?id=com.beemdevelopment.aegis)
 * [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2)
 * [Yubico Authenticator](market://details?id=com.yubico.yubioath)
