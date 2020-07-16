@@ -3,7 +3,8 @@
 SECRET=/etc/2fa/secret
 OATH_FILE=/home/2fa/users.oath
 OATH_LOCK=/home/2fa/users.lock
-export PATH="/usr/local/bin:$PATH"
+export PATH="/opt/openssl/bin:$PATH"
+export LD_LIBRARY_PATH="/opt/openssl/lib"
 
 mkdir -m 100 -p /tmp/incomming
 tmpfile=$(mktemp /tmp/incomming/oath-XXXXXXXXXXXX)
