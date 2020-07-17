@@ -22,7 +22,7 @@ add_user () {
     echo "Digits: 6"
     echo "Iterations: 30"
     echo "Algorithm: SHA-1"
-    qrencode -t UTF8 "otpauth://totp/${1}@${LOGINNAME}?secret=${OATH_SEED_BASE32}&issuer=$ISSUER&image="
+    qrencode -t UTF8 "otpauth://totp/${1}@${LOGINNAME}?secret=${OATH_SEED_BASE32}&issuer=$ISSUER&image=$IMG_URL"
     echo "RUN" | nc ::1 165
 }
 
