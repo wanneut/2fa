@@ -26,6 +26,13 @@ add_user () {
     echo "RUN" | nc ::1 165
 }
 
+err() {
+  echo "$1" >&2
+  exit 1
+}
+
+test -n "$SSH_TTY" || err "Please use a client with a proper console"
+
 if ! [[ -e $OATH_USER_FILE ]]; then
     add_user $USER
     echo "This QR Code is only shown once, please add it to your Authenticator APP."
